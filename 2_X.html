@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        picture {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        .small {
+            width: 50px;
+        }
+
+        .normal {
+            width: 75px;
+        }
+
+        .large {
+            width: 100px;
+        }
+
+        img {
+            border-radius: 50%;
+            /* Hace que la imagen sea redonda */
+            object-fit: cover;
+            /* Asegura que la imagen se recorte correctamente */
+        }
+
+        .disabled {
+            opacity: 0.3;
+        }
+    </style>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script type="text/babel">
+        const $app = document.getElementById("app");
+        const useState = React.useState;
+
+        const Avatar = ({ id, nombre = "SIN NOMBRE", tamaño = "grande" }) => {
+            const src = `https://randomuser.me/api/portraits/women/${id}.jpg`;
+            const [transparete, setTransparente] = useState(false);
+
+            let fotoClassName = ""
+            if (tamaño == "pequeño") {
+                fotoClassName = "small"
+            } else if (tamaño == "grande") {
+                fotoClassName = "large"
+            } else {
+                fotoClassName = "normal"
+            }
+
+            if (transparete) {
+                fotoClassName += " disabled";
+            }
+
+            return (
+                <picture>
+                    <img
+                    onClick={() => setTransparente(!transparete)}
+                        className={fotoClassName}
+                        src={src}
+                    />
+                    <span>{transparete ? "Desactivado" : nombre}</span>
+                </picture>
+            )
+            // Si transparente es false nombre = Desactivado, sino utiliza el nombre real
+        }
+
+        ReactDOM.render(
+            <div>
+                <Avatar id="1" nombre="JULIA" tamaño="pequeño" />
+                <Avatar id="2" nombre="ANA" tamaño="normal" />
+                <Avatar id="3" nombre="QUER" tamaño="grande" />
+                <Avatar id="4" />
+            </div>,
+            $app
+        )
+    </script>
+</body>
+
+</html>

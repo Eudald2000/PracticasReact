@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* Estilos para el contenedor principal */
+        div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        /* Estilos para el span que muestra el contador */
+        span {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        /* Estilos para los botones */
+        button {
+            font-size: 1rem;
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script type="text/babel">
+        const $app = document.getElementById("app");
+        const useState = React.useState;
+
+        function Contador() {
+            const [valorContador, setContador] = useState(10)
+            const [vecesUtilizado, setUsos] = useState(0)
+
+            function sumar() {
+                setContador(valorContador + 1);
+                setUsos(vecesUtilizado + 1);
+            }
+            return (
+                <div>
+                    <span> {valorContador} </span>
+                    <button onClick={sumar}>
+                        Sumar
+                    </button>
+                    
+                    <button onClick={() => {
+                        setContador(valorContador - 1)
+                        setUsos(vecesUtilizado + 1)
+                    }}>
+                        Restar
+                    </button>
+                    <span>Has utilizado el contador {vecesUtilizado} veces</span>
+                </div>
+
+            )
+        }
+
+        ReactDOM.render(
+            <div>
+                <h1>Ejemplo del contador</h1>
+                <Contador />
+            </div>,
+            $app
+        )
+    </script>
+</body>
+
+</html>
