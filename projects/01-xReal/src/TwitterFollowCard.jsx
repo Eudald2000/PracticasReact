@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export function TwitterFollowCard({ userName = "Sin Nombre", children, isFollowing, initialIsFollowing  }) {
+export function TwitterFollowCard({ userName = "Sin Nombre", children, initialIsFollowing  }) {
     // EL CHILDREN ES HIJO DE TwitterFollowCard EN APP.JSX
     const [isFollowing, setIsFollowing] = useState(initialIsFollowing)
     
