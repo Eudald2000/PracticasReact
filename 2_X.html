@@ -2,90 +2,93 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        picture {
-            display: flex;
-            flex-direction: column;
-            text-align: left;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    picture {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+    }
 
-        .small {
-            width: 50px;
-        }
+    picture.is-small {
+      width: 50px;
+    }
 
-        .normal {
-            width: 75px;
-        }
+    picture.is-normal {
+      width: 75px;
+    }
 
-        .large {
-            width: 100px;
-        }
+    picture.is-large {
+      width: 100px;
+    }
 
-        img {
-            border-radius: 50%;
-            /* Hace que la imagen sea redonda */
-            object-fit: cover;
-            /* Asegura que la imagen se recorte correctamente */
-        }
+    img {
+      border-radius: 50%;
+      /* Hace que la imagen sea redonda */
+      object-fit: cover;
+      /* Asegura que la imagen se recorte correctamente */
+      width: 100%;
+    }
 
-        .disabled {
-            opacity: 0.3;
-        }
-    </style>
-    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
-    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    .disabled {
+      opacity: 0.3;
+    }
+  </style>
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 </head>
 
 <body>
-    <div id="app"></div>
-    <script type="text/babel">
-        const $app = document.getElementById("app");
-        const useState = React.useState;
+  <div id="app"></div>
+  <script type="text/babel">
+    const $app = document.getElementById('app')
+    const useState = React.useState;
 
-        const Avatar = ({ id, nombre = "SIN NOMBRE", tamaño = "grande" }) => {
-            const src = `https://randomuser.me/api/portraits/women/${id}.jpg`;
-            const [transparete, setTransparente] = useState(false);
 
-            let fotoClassName = ""
-            if (tamaño == "pequeño") {
-                fotoClassName = "small"
-            } else if (tamaño == "grande") {
-                fotoClassName = "large"
-            } else {
-                fotoClassName = "normal"
-            }
+    //CREA EL ELEMENTO AVATAR QUE PUEDE RECIBIR ESTAS PROPS, CON VALORES POR DEFECTO
+    const Avatar = ({id, size = 'normal', name = 'No name'}) => {
+      const [enabled, setEnabled] = useState(true)
+      const src = `https://randomuser.me/api/portraits/women/${id}.jpg`;
 
-            if (transparete) {
-                fotoClassName += " disabled";
-            }
+      const imgClassName = enabled ? '' : 'disabled';
+      let pictureClassName = '';
+      if(size == 'small'){
+        pictureClassName = 'is-small'
+      }else if(size == 'large'){
+        pictureClassName = 'is-large'
+      }else{
+        pictureClassName = 'is-normal' 
+      }
 
-            return (
-                <picture>
-                    <img
-                    onClick={() => setTransparente(!transparete)}
-                        className={fotoClassName}
-                        src={src}
-                    />
-                    <span>{transparete ? "Desactivado" : nombre}</span>
-                </picture>
-            )
-            // Si transparente es false nombre = Desactivado, sino utiliza el nombre real
-        }
+      if(!id) return (
+        <picture className={pictureClassName}>
+          <img src='https://randomuser.me/api/portraits/lego/8.jpg'/>
+          <strong> {name} </strong>
+        </picture>
+      )
 
-        ReactDOM.render(
-            <div>
-                <Avatar id="1" nombre="JULIA" tamaño="pequeño" />
-                <Avatar id="2" nombre="ANA" tamaño="normal" />
-                <Avatar id="3" nombre="QUER" tamaño="grande" />
-                <Avatar id="4" />
-            </div>,
-            $app
-        )
-    </script>
+      return (
+        <picture className={pictureClassName}>
+          <img src={src} alt="" className={imgClassName} onClick={() =>
+            setEnabled(!enabled)}
+          />
+          <strong> {name} </strong>
+        </picture>
+      )
+    }
+
+    ReactDOM.render(
+      <div>
+        <Avatar id={1} size='small' />
+        <Avatar id={5} name='Pepe' />
+        <Avatar id={8} name='Jose' size='large' />
+        <Avatar name='Pepe' />
+      </div>
+      , $app)
+  </script>
 </body>
 
 </html>
