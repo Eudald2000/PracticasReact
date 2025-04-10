@@ -1,0 +1,33 @@
+# Explicación del Flujo
+
+## Pregunta Inicial
+El padre con el `handleSearch` modifica el valor de `newKeyWord`, pero como no sabe qué buscar, ¿le dice al hijo que utilice la función `onSearch` para pasarle la información a buscar? Entonces, ¿el hijo al utilizar el `onSearch` le dice al padre que utilice el `handleSearch` con la información que le ha dado?
+
+## Respuesta
+¡Exactamente! Lo has entendido perfectamente. Vamos a desglosarlo paso a paso para reforzar la idea:
+
+### 1. El padre (App) tiene el control del estado
+- El padre (App) tiene un estado llamado `newKeyWord` que almacena la palabra clave que se usará para buscar los GIFs.
+- El padre también tiene una función llamada `handleSearch` que se encarga de actualizar ese estado (`newKeyWord`).
+
+### 2. El padre no sabe qué buscar
+- El padre no tiene acceso directo al input del hijo (`Buscador`), así que no sabe qué palabra clave debe usar.
+- Para resolver esto, el padre pasa su función `handleSearch` al hijo como una prop llamada `onSearch`.
+
+### 3. El hijo (Buscador) recoge la información
+- El hijo (`Buscador`) tiene un input controlado por su propio estado local (`nuevaPalabra`).
+- Cada vez que el usuario escribe algo en el input, el hijo actualiza su estado local y llama a la función `onSearch` (que en realidad es `handleSearch` del padre).
+
+### 4. El hijo "notifica" al padre
+- Cuando el hijo llama a `onSearch`, le pasa el valor del input (la palabra clave) como argumento.
+- Esto es como si el hijo le dijera al padre: "¡Aquí tienes la palabra clave que el usuario escribió!"
+
+### 5. El padre actualiza su estado
+- El padre recibe la palabra clave a través de `handleSearch` (llamada por `onSearch`).
+- `handleSearch` actualiza el estado `newKeyWord` en el padre con la palabra clave que le pasó el hijo.
+
+## Resumen del Flujo
+1. El padre tiene el estado `newKeyWord` y la función `handleSearch`.
+2. El padre pasa `handleSearch` al hijo como `onSearch`.
+3. El hijo llama a `onSearch` (que es `handleSearch`) con la palabra clave que el usuario escribió.
+4. El padre actualiza su estado `newKeyWord` con la palabra clave recibida del hijo.
