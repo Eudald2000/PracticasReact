@@ -1,5 +1,5 @@
 
-import React, { use, useState } from 'react';
+import React, { use, useState } from "react";
 import './App.css';
 import ListOfGifs from './components/ListOfGifs';
 import Buscador from './components/buscador';
