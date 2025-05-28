@@ -1,28 +1,16 @@
-import { useEffect, useState } from 'react'
 import './App.css'
-import { getcatImg, getRandomFact } from './services/facts'
+import { useCatimage } from './hooks/useCatimage'
+import { useCatFact } from './hooks/useCatFact'
+import { Otro } from './Components/Otro'
 
 // const CAT_ENDPOINT_IMG = `https://cataas.com/cat/says/${firstWord}?fontSize=50&fontColor=red&json=true`
 
 function App () {
-  const [fact, setFact] = useState()
-  const [imgUrl, setImgUrl] = useState()
-
-  useEffect(() => {
-    getRandomFact().then(newFact => setFact(newFact))
-  },
-  [])
-
-  useEffect(() => {
-    if (!fact) return
-
-    const TreeFirstWord = fact.split(' ').slice(0, 3).join(' ')
-    getcatImg(TreeFirstWord).then(url => setImgUrl(url))
-  }, [fact])
+  const { fact, refreshRandomFact } = useCatFact()
+  const { imageUrl } = useCatimage({ fact })
 
   const handleClick = async () => {
-    const newFact = await getRandomFact()
-    setFact(newFact)
+    refreshRandomFact()
   }
 
   return (
@@ -30,7 +18,9 @@ function App () {
       <h1>FETCH GATOS</h1>
       <button onClick={ handleClick }>New fact</button>
       {fact && <p>{fact}</p>}
-      {imgUrl && <img src={ imgUrl } alt={`Random image with ${fact}`} />}
+      {imageUrl && <img src={ imageUrl } alt={`Random image with ${fact}`} />}
+
+      <Otro/>
     </>
   )
 }
