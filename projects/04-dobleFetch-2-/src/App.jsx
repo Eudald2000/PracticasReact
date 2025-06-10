@@ -3,12 +3,14 @@ import { useCatimage } from './hooks/useCatimage'
 import { useCatFact } from './hooks/useCatFact'
 import { Otro } from './Components/Otro'
 
-// const CAT_ENDPOINT_IMG = `https://cataas.com/cat/says/${firstWord}?fontSize=50&fontColor=red&json=true`
-
 function App () {
+  // Usar el hook de hechos (devuelve fact y función para refrescar)
   const { fact, refreshRandomFact } = useCatFact()
+
+  // Usar el hook de imágenes (devuelve imageUrl dependiendo del fact)
   const { imageUrl } = useCatimage({ fact })
 
+  // Manejador de clic para obtener nuevo hecho
   const handleClick = async () => {
     refreshRandomFact()
   }
@@ -16,9 +18,13 @@ function App () {
   return (
     <>
       <h1>FETCH GATOS</h1>
-      <button onClick={ handleClick }>New fact</button>
+      <button onClick={handleClick}>New fact</button>
+
+      {/* Mostrar el hecho si existe */}
       {fact && <p>{fact}</p>}
-      {imageUrl && <img src={ imageUrl } alt={`Random image with ${fact}`} />}
+
+      {/* Mostrar la imagen si la URL está disponible */}
+      {imageUrl && <img src={imageUrl} alt={`Random image with ${fact}`} />}
 
       <Otro/>
     </>
