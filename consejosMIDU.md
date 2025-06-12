@@ -17,3 +17,7 @@ npm init playwright@latest
 
 ## En una prueva tecnica lo principal es que el codigo funcione, mas adelante se puede componetizar y mejorar el código
 
+## las busquedas de informacion, es mejor no buscar en google o stackoverflow, hay que utilizar mdn
+
+## Durante la prueba tecnica, es buena practica hablar de lo que se hace, o dejar comentarios, para que el entrevistador pueda entender el razonamiento detrás del código
+
