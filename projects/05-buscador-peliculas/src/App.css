@@ -1,17 +1,52 @@
-.page{
+.page {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-main{
+main {
   display: flex;
   justify-content: center;
+  width: 100%;
 }
 
-form{
+form {
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
+.movies {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  list-style: none;
+} 
+
+.movie{
+  text-align: center;
+  text-decoration: none;
+}
+
+.movie img{
+  border-radius: 8px;
+}
+
+/* .movies {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.movies li {
+  flex: 0 0 200px; No crecer, no encoger, base 200px, cambiar a 1 1 para adaptar tamaño 
+  max-width: 300px; Límite máximo 
+} */
