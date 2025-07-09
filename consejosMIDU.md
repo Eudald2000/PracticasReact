@@ -23,8 +23,8 @@ npm init playwright@latest
 ## Evita tener los hooks dentro de app, utiliza los customs hooks para encapsular la logica de negocio y hacer el codigo mas limpio
 
 # Informacion basica varia
-- useState: Gestionar el estado local de un componente y provocar re-renderizados cuando el estado cambia.
+- useState: proporciona un valor de estado local y una función para actualizarlo. Cuando invocas el setter, React programa automáticamente un nuevo render del componente mostrando el estado actualizado.
 
-- useEffect: Ejecutar código con efectos secundarios después de que el componente se renderice, y gestionar el ciclo de vida del componente.
+- useEffect: ejecuta lógica con efectos secundarios después de cada render (o cuando cambian las dependencias). Se usa para suscribirse a eventos, hacer peticiones asíncronas o realizar limpiezas antes de que el componente se desmonte o se actualicen esas dependencias.
 
-- useRef:  Crear una referencia mutable que persiste durante toda la vida del componente sin causar re-renderizados cuando cambia.
+- useRef: crea un objeto con la propiedad current que persiste entre renders sin provocar nuevos renders al cambiar. Ideal para acceder a nodos DOM, almacenar temporizadores o valores mutables que no forman parte de la UI.
