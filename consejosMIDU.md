@@ -28,3 +28,7 @@ npm init playwright@latest
 - useEffect: ejecuta lógica con efectos secundarios después de cada render (o cuando cambian las dependencias). Se usa para suscribirse a eventos, hacer peticiones asíncronas o realizar limpiezas antes de que el componente se desmonte o se actualicen esas dependencias.
 
 - useRef: crea un objeto con la propiedad current que persiste entre renders sin provocar nuevos renders al cambiar. Ideal para acceder a nodos DOM, almacenar temporizadores o valores mutables que no forman parte de la UI.
+
+- useMemo: memorizas el resultado de una función para evitar recomputar valores costosos en cada render, y solo vuelve a calcularse cuando cambian sus dependencias. Se usa en cálculos pesados como filtrados y agregaciones de listas grandes, generación de objetos de configuración o derivación de datos complejos antes de pasarlos al render.
+
+- useCallback: devuelves una función memorizada que conserva la misma referencia entre renders mientras sus dependencias no cambien. Es útil al pasar callbacks a componentes hijos envueltos en React.memo, usarlos como dependencias estables en useEffect o useMemo, o evitar renders innecesarios provocados por funciones que cambian de referencia. El useCallback utiliza por debajo el useMemo.

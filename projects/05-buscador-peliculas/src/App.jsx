@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useState } from 'react'
 import './App.css'
 import { Movies } from './components/Movies'
 import { useMovies } from './hooks/useMovies'
 import { useSearch } from './hooks/useSearch'
+import debounce from 'just-debounce-it'
 
 function App () {
   const [sort, setSort] = useState(false)
@@ -11,6 +12,13 @@ function App () {
     search,
     sort
   })
+
+  const debounceGetMovies = useCallback(
+    debounce(search => {
+      getMovies({ search })
+    }, 2000)
+    , [getMovies]
+  )
 
   function handleSort () {
     setSort(!sort)
@@ -23,14 +31,11 @@ function App () {
 
   function handleChange (e) {
     const newQuery = e.target.value
-    // Aqui podemos hacer prevalidaciones
     if (newQuery.startsWith(' ')) return
     setSearch(newQuery)
+    // getMovies({ search: newQuery }) Busqueda mientras se escribe
+    debounceGetMovies(newQuery) // Busca despues de x tiempo, de la ultima tecla
   }
-
-  useEffect(() => {
-    console.log('Reehecho')
-  }, [getMovies])
 
   return (
     <div className="page">
